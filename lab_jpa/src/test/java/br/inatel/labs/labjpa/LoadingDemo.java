@@ -31,7 +31,7 @@ public class LoadingDemo {
     @Test
     public void demoLazyLoading() {
         try {
-            NotaCompra nota = service.buscarNotaCompraPeloId(1L);
+            NotaCompra nota = service.buscarNotaCompraPeloId(1L).isPresent() ? service.buscarNotaCompraPeloId(1L).get() : null;
 
             List<NotaCompraItem> listaNotaCompraItem = nota.getListaNotaCompraItem();
             int nroDeItens = listaNotaCompraItem.size();
@@ -44,7 +44,7 @@ public class LoadingDemo {
     @Test
     public void demoEagerLoading() {
         try {
-            NotaCompraItem item = service.buscarNotaCompraItemPeloId(1L);
+            NotaCompraItem item = service.buscarNotaCompraItemPeloId(1L).isPresent() ? service.buscarNotaCompraItemPeloId(1L).get() : null;
             LocalDate dataEmissao = item.getNotaCompra().getDataEmissao();
 
             System.out.println("Data de emissão da nota: " + dataEmissao);
